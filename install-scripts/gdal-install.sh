@@ -23,7 +23,17 @@ wget --no-check-certificate \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
 bash Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy=0.13.3
+echo y | conda install scipy=0.13.3 jinja2 conda-build
+
+# Install conda postgresql client package
+vers=0.1
+cd $tools && \
+wget --no-check-certificate \
+https://github.com/minadyn/conda-postgresql-client/archive/$vers.zip && \
+unzip $vers && \
+conda build conda-postgresql-client-$vers && \
+conda install --yes $(conda build conda-postgresql-client-$vers --output) && \
+rm -f conda-postgresql-client-$vers
 
 # Install CFITSIO
 cd $tools && \
@@ -72,7 +82,7 @@ wget --no-check-certificate \
 http://download.osgeo.org/gdal/1.10.0/gdal-1.10.0.tar.gz && \
 tar xvfz gdal-1.10.0.tar.gz && \
 cd gdal-1.10.0 && \
-./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
+./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio --with-pg=$tools/anaconda/bin/pg_config \
 --with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no && \
 make && make install && \
 cd swig/python && python setup.py install

@@ -25,6 +25,16 @@ bash Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
 echo y | conda install scipy=0.13.3 jinja2 conda-build
 
+# Install conda postgresql client package
+vers=0.1
+cd $tools && \
+wget --no-check-certificate \
+https://github.com/minadyn/conda-postgresql-client/archive/$vers.zip && \
+unzip $vers && \
+conda build conda-postgresql-client-$vers && \
+conda install --yes $(conda build conda-postgresql-client-$vers --output) && \
+rm -f conda-postgresql-client-$vers
+
 # Install CFITSIO
 cd $tools && \
 wget --no-check-certificate \

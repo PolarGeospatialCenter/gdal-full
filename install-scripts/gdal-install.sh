@@ -23,7 +23,7 @@ wget --no-check-certificate \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
 bash Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy=0.13.3
+echo y | conda install scipy=0.13.3 jinja2 conda-build
 
 # Install CFITSIO
 cd $tools && \

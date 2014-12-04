@@ -5,6 +5,13 @@ echo "Please specify a path to install to:"
 read tools
 
 mkdir -p $tools
+case "$tools" in
+	/*)
+	;;
+	*)
+	tools=$(pwd)/$tools
+	;;
+esac
 export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH
 export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib
 

@@ -15,8 +15,10 @@ Software versions installed
  * pyyaml 3.11  
  * scipy 0.13.3  
  * sqlite 3.7.13  
+ * postgresql-client 0.1
 * cfitsio 3.360  
 * GEOS 3.4.2  
 * PROJ 4.8.0  
 * OpenJPEG 2.0.0  
+* PostgreSQL 8.4.17 (client only)
 * GDALl 1.10.0  

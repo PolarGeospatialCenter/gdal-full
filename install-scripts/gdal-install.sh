@@ -12,6 +12,12 @@ case "$tools" in
 	tools=$(pwd)/$tools
 	;;
 esac
+default="1.10.0"
+echo -e "Choose GDAL version ($default): \c"
+read gdal_version
+[ -z "$gdal_version" ] && gdal_version=$default
+echo "Using: gdal $gdal_version"
+  
 export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH
 export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib
 
@@ -77,11 +83,12 @@ make install
 # Parallel make will fail due to race conditions. Do not use -j
 # GDAL 1.11 breaks sparse_disp
 export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
+
 cd $tools && \
 wget --no-check-certificate \
-http://download.osgeo.org/gdal/1.10.0/gdal-1.10.0.tar.gz && \
-tar xvfz gdal-1.10.0.tar.gz && \
-cd gdal-1.10.0 && \
+http://download.osgeo.org/gdal/$gdal_version/gdal-$gdal_version.tar.gz && \
+tar xvfz gdal-$gdal_version.tar.gz && \
+cd gdal-$gdal_version && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio --with-pg=$tools/anaconda/bin/pg_config \
 --with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no && \
 make && make install && \

@@ -29,7 +29,7 @@ wget --no-check-certificate \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
 bash Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy=0.13.3 jinja2 conda-build
+echo y | conda install scipy=0.13.3 jinja2 conda-build dateutil
 
 # Install conda postgresql client package
 vers=0.1
@@ -97,7 +97,7 @@ cd swig/python && python setup.py install
 export	GDAL_DATA=$tools/gdal/share/gdal
 
 echo "export	PATH=$tools/anaconda/bin:$tools/gdal/bin:\$PATH" >> $tools/init-asp.sh
-echo "export	GDAL_DATA=$tools/gdal/share/gdal" >> $tools/init-asp.sh
+echo "export	GDAL_DATA=$tools/gdal/share/gdal" >> $tools/init-gdal.sh
 echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:\$LD_LIBRARY_PATH" >> $tools/init-asp.sh
 echo
 echo	"The tools were installed in $tools."

@@ -96,9 +96,9 @@ cd swig/python && python setup.py install
 
 export	GDAL_DATA=$tools/gdal/share/gdal
 
-echo "export	PATH=$tools/anaconda/bin:$tools/gdal/bin:\$PATH" >> $tools/init-asp.sh
+echo "export	PATH=$tools/anaconda/bin:$tools/gdal/bin:\$PATH" >> $tools/init-gdal.sh
 echo "export	GDAL_DATA=$tools/gdal/share/gdal" >> $tools/init-gdal.sh
-echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:\$LD_LIBRARY_PATH" >> $tools/init-asp.sh
+echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:\$LD_LIBRARY_PATH" >> $tools/init-gdal.sh
 echo
 echo	"The tools were installed in $tools."
-echo	"There is an init script that sets the environment and is installed at $tools/init-asp.sh. You can source this file to run."
+echo	"There is an init script that sets the environment and is installed at $tools/init-gdal.sh. You can source this file to run."

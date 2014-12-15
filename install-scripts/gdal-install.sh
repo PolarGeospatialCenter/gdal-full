@@ -4,6 +4,18 @@ echo
 echo "Please specify a path to install to:"
 read tools
 
+# Logging
+date_str="+%Y_%m%d_%H%M%S"
+full_date=`date $date_str`
+host=$(hostname)
+log="output_"$host"_"$full_date.log
+
+exec > >(tee --append $log)
+exec 2>&1
+
+
+# Main install
+
 mkdir -p $tools
 case "$tools" in
 	/*)
@@ -12,6 +24,9 @@ case "$tools" in
 	tools=$(pwd)/$tools
 	;;
 esac
+
+echo "Installing in: "$tools
+
 default="1.10.0"
 echo -e "Choose GDAL version ($default): \c"
 read gdal_version

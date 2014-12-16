@@ -41,10 +41,10 @@ export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$t
 
 cd $tools && \
 wget --no-check-certificate \
-https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
-bash Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
+http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh && \
+bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy=0.13.3 jinja2 conda-build dateutil
+echo y | conda install scipy jinja2 conda-build dateutil
 
 # Install conda postgresql client package
 vers=0.1
@@ -84,6 +84,14 @@ cd proj-4.8.0 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
 make -j && make install
 
+# Cmake 2.8
+cd $tools &&
+wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz && \
+tar xvfz cmake-2.8.12.2.tar.gz && \
+cd cmake-2.8.12.2 && \
+./configure && \
+gmake
+
 # OPENJPEG
 # Change to cmake or cmake28 depending on what is installed
 cd $tools && \
@@ -91,7 +99,7 @@ wget --no-check-certificate \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openjpeg-2.0.0.tar.gz && \
 tar xvfz openjpeg-2.0.0.tar.gz && \
 cd openjpeg-2.0.0 && \
-cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
+$tools/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
 make install
 
 # GDAL

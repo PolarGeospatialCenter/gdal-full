@@ -112,7 +112,7 @@ wget --no-check-certificate \
 http://download.osgeo.org/gdal/$gdal_version/gdal-$gdal_version.tar.gz && \
 tar xvfz gdal-$gdal_version.tar.gz && \
 cd gdal-$gdal_version && \
-./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio --with-pg=$tools/anaconda/bin/pg_config \
+./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
 --with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no && \
 make && make install && \
 cd swig/python && python setup.py install

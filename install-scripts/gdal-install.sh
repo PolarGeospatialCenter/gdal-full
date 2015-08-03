@@ -33,6 +33,20 @@ read gdal_version
 [ -z "$gdal_version" ] && gdal_version=$default
 echo "Using: gdal $gdal_version"
   
+echo "If you need FileGDB write support, download and extract the API from ESRI"
+echo "http://www.esri.com/apps/products/download/#File_Geodatabase_API_1.4"
+echo -e "Path to extracted FileGDB_API (no support): \c"
+read -e filegdb_api_path 
+if [ -n "$filegdb_api_path" -a -d "$filegdb_api_path" ]; then
+    echo "Using:  $filegdb_api_path"
+    filegdb_flags="--with-fgdb=$filegdb_api_path"
+    filegdb_ldpath="$filegdb_api_path/lib:"
+else
+    echo "No path specified or path is invalid, FileGDB support will not be included"
+    filegdb_flags=""
+    filegdb_ldpath=""
+fi
+
 export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH
 export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib
 
@@ -113,7 +127,8 @@ http://download.osgeo.org/gdal/$gdal_version/gdal-$gdal_version.tar.gz && \
 tar xvfz gdal-$gdal_version.tar.gz && \
 cd gdal-$gdal_version && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
---with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no && \
+--with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no \
+$filegdb_flags && \
 make && make install && \
 cd swig/python && python setup.py install
 
@@ -121,7 +136,7 @@ export	GDAL_DATA=$tools/gdal/share/gdal
 
 echo "export	PATH=$tools/anaconda/bin:$tools/gdal/bin:\$PATH" >> $tools/init-gdal.sh
 echo "export	GDAL_DATA=$tools/gdal/share/gdal" >> $tools/init-gdal.sh
-echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:\$LD_LIBRARY_PATH" >> $tools/init-gdal.sh
+echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:$filegdb_ldpath\$LD_LIBRARY_PATH" >> $tools/init-gdal.sh
 echo
 echo	"The tools were installed in $tools."
 echo	"There is an init script that sets the environment and is installed at $tools/init-gdal.sh. You can source this file to run."

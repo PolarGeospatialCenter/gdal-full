@@ -68,7 +68,7 @@ export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$t
 # This will build the base directory /tools for all following software
 
 cd $tools && \
-wget --no-check-certificate \
+wget --no-check-certificate --nv \
 http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh && \
 bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
@@ -77,7 +77,7 @@ echo y | conda install scipy jinja2 conda-build dateutil
 # Install conda postgresql client package
 vers=0.1
 cd $tools && \
-wget --no-check-certificate \
+wget --no-check-certificate --nv \
 https://github.com/minadyn/conda-postgresql-client/archive/$vers.zip && \
 unzip $vers && \
 conda build conda-postgresql-client-$vers && \
@@ -86,7 +86,7 @@ rm -f conda-postgresql-client-$vers
 
 # Install CFITSIO
 cd $tools && \
-wget --no-check-certificate \
+wget --no-check-certificate --nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/cfitsio/cfitsio3360.tar.gz && \
 tar xvfz cfitsio3360.tar.gz && \
 cd cfitsio && \
@@ -96,7 +96,7 @@ make -j && make install
 # GEOS
 export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 cd $tools && \
-wget --no-check-certificate \
+wget --no-check-certificate --nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/geos/geos-3.4.2.tar.bz2 && \
 tar xvfj geos-3.4.2.tar.bz2 && \
 cd geos-3.4.2 && \
@@ -105,16 +105,16 @@ make -j && make install
 
 # PROJ
 cd $tools && \
-wget --no-check-certificate \
+wget --no-check-certificate --nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.8.0.tar.gz && \
 tar xvfz proj-4.8.0.tar.gz && \
 cd proj-4.8.0 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
 make -j && make install
 
-# Cmake 2.8
+# Cmake 3.4.1
 cd $tools &&
-wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz && \
+wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz --nv && \
 tar xvfz cmake-3.4.1.tar.gz && \
 cd cmake-3.4.1 && \
 ./configure && \
@@ -123,7 +123,7 @@ gmake
 # OPENJPEG
 # Change to cmake or cmake28 depending on what is installed
 cd $tools && \
-wget --no-check-certificate \
+wget --no-check-certificate --nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openjpeg-2.0.0.tar.gz && \
 tar xvfz openjpeg-2.0.0.tar.gz && \
 cd openjpeg-2.0.0 && \
@@ -136,7 +136,7 @@ make install
 export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 
 cd $tools && \
-wget --no-check-certificate \
+wget --no-check-certificate --nv \
 http://download.osgeo.org/gdal/$gdal_version/gdal-$gdal_version.tar.gz && \
 tar xvfz gdal-$gdal_version.tar.gz && \
 cd gdal-$gdal_version && \

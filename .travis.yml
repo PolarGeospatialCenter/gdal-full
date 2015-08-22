@@ -1,3 +1,7 @@
+addons:
+  apt:
+    packages:
+    - gmake
 language: cpp
 env:
   - PREFIX="$TRAVIS_BUILD_DIR/test-1.1.10" GDAL_VERSION="1.1.10" FILEGDB_API_PATH="Invalid-filegdb-api-path"

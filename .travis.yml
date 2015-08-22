@@ -1,3 +1,4 @@
+language: cpp
 env:
   - PREFIX="/test"
   - GDAL_VERSION="1.1.10"

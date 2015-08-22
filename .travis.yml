@@ -1,5 +1,5 @@
 language: cpp
 env:
-  - PREFIX="/test-1.1.10" GDAL_VERSION="1.1.10" FILEGDB_API_PATH="Invalid-filegdb-api-path"
-  - PREFIX="/test-2.0.0" GDAL_VERSION="2.0.0" FILEGDB_API_PATH="Invalid-filegdb-api-path"
+  - PREFIX="test-1.1.10" GDAL_VERSION="1.1.10" FILEGDB_API_PATH="Invalid-filegdb-api-path"
+  - PREFIX="test-2.0.0" GDAL_VERSION="2.0.0" FILEGDB_API_PATH="Invalid-filegdb-api-path"
 script: install-scripts/gdal-install.sh

@@ -1,0 +1,5 @@
+env:
+  - PREFIX="/test"
+  - GDAL_VERSION="1.1.10"
+  - FILEGDB_API_PATH="Invalid-filegdb-api-path"
+script: install-scripts/gdal-install.sh

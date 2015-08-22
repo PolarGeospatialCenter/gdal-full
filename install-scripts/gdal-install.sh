@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo 
-echo "Please specify a path to install to:"
-read tools
+if [ -z $PREFIX ]; then
+	echo 
+	echo "Please specify a path to install to:"
+	read tools
+else
+        tools=$PREFIX
+fi
 
 # Logging
 date_str="+%Y_%m%d_%H%M%S"
@@ -27,18 +31,28 @@ esac
 
 echo "Installing in: "$tools
 
-default="1.10.0"
-echo -e "Choose GDAL version ($default): \c"
-read gdal_version
-[ -z "$gdal_version" ] && gdal_version=$default
+if [ -z $GDAL_VERSION ]; then
+	default="1.10.0"
+	echo -e "Choose GDAL version ($default): \c"
+	read gdal_version
+	[ -z "$gdal_version" ] && gdal_version=$default
+else
+        gdal_version=$GDAL_VERSION
+fi
+
 echo "Using: gdal $gdal_version"
   
-echo "If you need FileGDB write support, download and extract the API from ESRI"
-echo "http://www.esri.com/apps/products/download/#File_Geodatabase_API_1.4"
-echo -e "Path to extracted FileGDB_API (no support): \c"
-read -e filegdb_api_path 
+if [ -z $FILEGDB_API_PATH ]; then
+	echo "If you need FileGDB write support, download and extract the API from ESRI"
+	echo "http://www.esri.com/apps/products/download/#File_Geodatabase_API_1.4"
+	echo -e "Path to extracted FileGDB_API (no support): \c"
+	read -e filegdb_api_path 
+else
+	filegdb_api_path=$FILEGDB_API_PATH
+fi
+
 if [ -n "$filegdb_api_path" -a -d "$filegdb_api_path" ]; then
-    echo "Using:  $filegdb_api_path"
+    	echo "Using:  $filegdb_api_path"
     filegdb_flags="--with-fgdb=$filegdb_api_path"
     filegdb_ldpath="$filegdb_api_path/lib:"
 else

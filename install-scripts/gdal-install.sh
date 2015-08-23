@@ -97,7 +97,7 @@ exit_err "Failed to install conda postgresql client package"
 cd $tools && \
 wget --no-check-certificate -nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/cfitsio/cfitsio3360.tar.gz && \
-tar xvfz cfitsio3360.tar.gz && \
+tar xfz cfitsio3360.tar.gz && \
 cd cfitsio && \
 ./configure --prefix=$tools/cfitsio --enable-sse2 --enable-ssse3 --enable-reentrant && \
 make -j && make install || \
@@ -108,7 +108,7 @@ export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 cd $tools && \
 wget --no-check-certificate -nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/geos/geos-3.4.2.tar.bz2 && \
-tar xvfj geos-3.4.2.tar.bz2 && \
+tar xfj geos-3.4.2.tar.bz2 && \
 cd geos-3.4.2 && \
 ./configure --prefix=$tools/geos && \
 make -j && make install  || \
@@ -118,7 +118,7 @@ exit_err "Failed to install geos"
 cd $tools && \
 wget --no-check-certificate -nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.8.0.tar.gz && \
-tar xvfz proj-4.8.0.tar.gz && \
+tar xfz proj-4.8.0.tar.gz && \
 cd proj-4.8.0 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
 make -j && make install  || \
@@ -144,7 +144,7 @@ exit_err "Failed to install Cmake"
 cd $tools && \
 wget --no-check-certificate -nv \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openjpeg-2.0.0.tar.gz && \
-tar xvfz openjpeg-2.0.0.tar.gz && \
+tar xfz openjpeg-2.0.0.tar.gz && \
 cd openjpeg-2.0.0 && \
 $tools/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
 make install || \
@@ -158,7 +158,7 @@ export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 cd $tools && \
 wget --no-check-certificate -nv \
 http://download.osgeo.org/gdal/$gdal_version/gdal-$gdal_version.tar.gz && \
-tar xvfz gdal-$gdal_version.tar.gz && \
+tar xfz gdal-$gdal_version.tar.gz && \
 cd gdal-$gdal_version && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
 --with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no \

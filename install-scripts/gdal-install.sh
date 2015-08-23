@@ -118,7 +118,7 @@ wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz --nv && \
 tar xvfz cmake-3.4.1.tar.gz && \
 cd cmake-3.4.1 && \
 ./configure && \
-gmake
+make
 
 # OPENJPEG
 # Change to cmake or cmake28 depending on what is installed

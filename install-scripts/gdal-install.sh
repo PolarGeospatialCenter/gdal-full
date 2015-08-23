@@ -113,12 +113,18 @@ cd proj-4.8.0 && \
 make -j && make install
 
 # Cmake 3.4.1
+if hash gmake 2>/dev/null; then 
+	gmake_cmd="gmake"
+else
+	gmake_cmd="make"
+fi
+
 cd $tools &&
 wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz --nv && \
 tar xvfz cmake-3.4.1.tar.gz && \
 cd cmake-3.4.1 && \
 ./configure && \
-make
+$gmake_cmd
 
 # OPENJPEG
 # Change to cmake or cmake28 depending on what is installed

@@ -8,6 +8,11 @@ else
         tools=$PREFIX
 fi
 
+function exit_err () {
+	echo $1
+        exit 1
+}
+
 # Logging
 date_str="+%Y_%m%d_%H%M%S"
 full_date=`date $date_str`
@@ -71,8 +76,11 @@ cd $tools && \
 wget --no-check-certificate -nv \
 http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh && \
 bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
-rm -f Miniconda*
-echo y | conda install scipy jinja2 conda-build dateutil
+rm -f Miniconda* || \
+exit_err "Failed to install Miniconda"
+
+echo y | conda install scipy jinja2 conda-build dateutil || \
+exit_err "Failed to install
 
 # Install conda postgresql client package
 vers=0.1
@@ -82,7 +90,8 @@ https://github.com/minadyn/conda-postgresql-client/archive/$vers.zip && \
 unzip $vers && \
 conda build conda-postgresql-client-$vers && \
 conda install --yes $(conda build conda-postgresql-client-$vers --output) && \
-rm -f conda-postgresql-client-$vers
+rm -f conda-postgresql-client-$vers || \
+exit_err "Failed to install conda postgresql client package"
 
 # Install CFITSIO
 cd $tools && \
@@ -91,7 +100,8 @@ https://github.com/PolarGeospatialCenter/asp/raw/master/originals/cfitsio/cfitsi
 tar xvfz cfitsio3360.tar.gz && \
 cd cfitsio && \
 ./configure --prefix=$tools/cfitsio --enable-sse2 --enable-ssse3 --enable-reentrant && \
-make -j && make install
+make -j && make install || \
+exit_err "Failed to install CFITSIO"
 
 # GEOS
 export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
@@ -101,7 +111,8 @@ https://github.com/PolarGeospatialCenter/asp/raw/master/originals/geos/geos-3.4.
 tar xvfj geos-3.4.2.tar.bz2 && \
 cd geos-3.4.2 && \
 ./configure --prefix=$tools/geos && \
-make -j && make install 
+make -j && make install  || \
+exit_err "Failed to install geos"
 
 # PROJ
 cd $tools && \
@@ -110,7 +121,8 @@ https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.8.
 tar xvfz proj-4.8.0.tar.gz && \
 cd proj-4.8.0 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
-make -j && make install
+make -j && make install  || \
+exit_err "Failed to install proj"
 
 # Cmake 3.4.1
 if hash gmake 2>/dev/null; then 
@@ -124,7 +136,8 @@ wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz --nv && \
 tar xvfz cmake-3.4.1.tar.gz && \
 cd cmake-3.4.1 && \
 ./configure && \
-$gmake_cmd
+$gmake_cmd || \
+exit_err "Failed to install Cmake"
 
 # OPENJPEG
 # Change to cmake or cmake28 depending on what is installed
@@ -134,7 +147,8 @@ https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openj
 tar xvfz openjpeg-2.0.0.tar.gz && \
 cd openjpeg-2.0.0 && \
 $tools/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
-make install
+make install || \
+exit_err "Failed to install OpenJPEG"
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
@@ -150,7 +164,8 @@ cd gdal-$gdal_version && \
 --with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no \
 $filegdb_flags && \
 make && make install && \
-cd swig/python && python setup.py install
+cd swig/python && python setup.py install || \
+exit_err "Failed to install GDAL"
 
 export	GDAL_DATA=$tools/gdal/share/gdal
 

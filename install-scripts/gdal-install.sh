@@ -80,7 +80,7 @@ rm -f Miniconda* || \
 exit_err "Failed to install Miniconda"
 
 echo y | conda install scipy jinja2 conda-build dateutil || \
-exit_err "Failed to install
+exit_err "Failed to install conda packages"
 
 # Install conda postgresql client package
 vers=0.1

@@ -90,7 +90,7 @@ https://github.com/minadyn/conda-postgresql-client/archive/$vers.zip && \
 unzip $vers && \
 conda build conda-postgresql-client-$vers && \
 conda install --yes $(conda build conda-postgresql-client-$vers --output) && \
-rm -f conda-postgresql-client-$vers || \
+rm -rf conda-postgresql-client-$vers || \
 exit_err "Failed to install conda postgresql client package"
 
 # Install CFITSIO

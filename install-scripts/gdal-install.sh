@@ -100,7 +100,7 @@ make -j && make install
 
 # Cmake 2.8
 cd $tools &&
-wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz && \
+wget --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz && \
 tar xvfz cmake-3.4.1.tar.gz && \
 cd cmake-3.4.1 && \
 ./configure && \
@@ -113,7 +113,7 @@ wget --no-check-certificate \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openjpeg-2.0.0.tar.gz && \
 tar xvfz openjpeg-2.0.0.tar.gz && \
 cd openjpeg-2.0.0 && \
-$tools/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
+$tools/cmake-3.4.1/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
 make install
 
 # GDAL

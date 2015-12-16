@@ -100,9 +100,9 @@ make -j && make install
 
 # Cmake 2.8
 cd $tools &&
-wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz && \
-tar xvfz cmake-2.8.12.2.tar.gz && \
-cd cmake-2.8.12.2 && \
+wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz && \
+tar xvfz cmake-3.4.1.tar.gz && \
+cd cmake-3.4.1 && \
 ./configure && \
 gmake
 

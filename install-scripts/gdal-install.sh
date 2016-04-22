@@ -27,7 +27,7 @@ esac
 
 echo "Installing in: "$tools
 
-default="1.10.0"
+default="2.0.0"
 echo -e "Choose GDAL version ($default): \c"
 read gdal_version
 [ -z "$gdal_version" ] && gdal_version=$default
@@ -58,7 +58,7 @@ wget --no-check-certificate \
 http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh && \
 bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy jinja2 conda-build dateutil
+echo y | conda install scipy jinja2 conda-build dateutil shapely
 
 # Install conda postgresql client package
 vers=0.1
@@ -98,7 +98,7 @@ cd proj-4.8.0 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
 make -j && make install
 
-# Cmake 2.8
+# Cmake 3.4.1
 cd $tools &&
 wget --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz && \
 tar xvfz cmake-3.4.1.tar.gz && \

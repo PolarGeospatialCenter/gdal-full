@@ -17,11 +17,13 @@ Software versions installed
  * sqlite   
  * postgresql-client 
  * jinja2  
- * dateutil  
+ * dateutil 
+ * shapely
 * cfitsio 3.360  
 * GEOS 3.4.2  
 * PROJ 4.8.0  
-* CMake 2.8.12.2  
+* CMake 3.4.1
 * OpenJPEG 2.0.0  
 * PostgreSQL 8.4.17 (client only)
-* GDALl 1.10.0  
+* GDAL 2.0.0  
+* FileGDB Write Support

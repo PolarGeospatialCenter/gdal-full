@@ -60,6 +60,17 @@ bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
 echo y | conda install scipy jinja2 conda-build dateutil shapely
 
+# Install configargparse package
+cd $tools && \
+wget --no-check-certificate \
+https://github.com/bw2/ConfigArgParse/archive/master.zip && \
+unzip master.zip && \
+cd ConfigArgParse-master && \
+python setup.py build && \
+python setup.py install && \
+cd .. && \
+rm -f master.zip
+
 # Install conda postgresql client package
 vers=0.1
 cd $tools && \

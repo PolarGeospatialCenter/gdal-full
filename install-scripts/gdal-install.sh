@@ -27,7 +27,7 @@ esac
 
 echo "Installing in: "$tools
 
-default="2.1.0"
+default="2.1.1"
 echo -e "Choose GDAL version ($default): \c"
 read gdal_version
 [ -z "$gdal_version" ] && gdal_version=$default
@@ -58,7 +58,7 @@ wget --no-check-certificate \
 http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh && \
 bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy jinja2 conda-build dateutil shapely scikit-image
+echo y | conda install scipy jinja2 conda-build dateutil shapely scikit-image pandas lxml
 
 # Install configargparse package
 cd $tools && \

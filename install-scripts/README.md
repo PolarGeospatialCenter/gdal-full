@@ -21,11 +21,13 @@ Software versions installed
  * shapely
  * scikit-image
  * ConfigArgParse
+ * Pandas
+ * LXML
 * cfitsio 3.360  
 * GEOS 3.4.2  
 * PROJ 4.8.0  
 * CMake 3.4.1
 * OpenJPEG 2.0.0  
 * PostgreSQL 8.4.17 (client only)
-* GDAL 2.1.0  
+* GDAL 2.1.1 
 * FileGDB Write Support

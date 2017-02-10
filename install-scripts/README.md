@@ -30,5 +30,5 @@ Software versions installed
 * CMake 3.4.1
 * OpenJPEG 2.0.0  
 * PostgreSQL 8.4.17 (client only)
-* GDAL 2.1.2
+* GDAL 2.1.3
 * FileGDB Write Support

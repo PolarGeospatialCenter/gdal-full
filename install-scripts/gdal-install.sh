@@ -27,7 +27,7 @@ esac
 
 echo "Installing in: "$tools
 
-default="2.1.2"
+default="2.1.3"
 echo -e "Choose GDAL version ($default): \c"
 read gdal_version
 [ -z "$gdal_version" ] && gdal_version=$default

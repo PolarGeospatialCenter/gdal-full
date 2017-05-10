@@ -32,3 +32,4 @@ Software versions installed
 * PostgreSQL 8.4.17 (client only)
 * GDAL 2.1.3
 * FileGDB Write Support
+* NetCDF 4.4.1.1

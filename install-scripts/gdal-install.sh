@@ -128,6 +128,15 @@ cd openjpeg-2.0.0 && \
 $tools/cmake-3.4.1/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
 make install
 
+#NetCDF
+cd $tools && \
+wget --no-check-certificate \
+ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz && \
+tar xvfz netcdf-4.4.1.1.tar.gz && \
+cd netcdf-4.4.1.1 && \
+./configure --prefix=$tools/netCDF --disable-netcdf-4 && \
+make -j && make install
+
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
 # GDAL 1.11 breaks sparse_disp

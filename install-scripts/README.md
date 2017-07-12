@@ -26,7 +26,7 @@ Software versions installed
  * ScanDir
 * cfitsio 3.360  
 * GEOS 3.4.2  
-* PROJ 4.8.0  
+* PROJ 4.9.3  
 * CMake 3.4.1
 * OpenJPEG 2.0.0  
 * PostgreSQL 8.4.17 (client only)

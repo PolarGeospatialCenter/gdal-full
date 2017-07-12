@@ -104,9 +104,9 @@ make -j && make install
 # PROJ
 cd $tools && \
 wget --no-check-certificate \
-https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.8.0.tar.gz && \
-tar xvfz proj-4.8.0.tar.gz && \
-cd proj-4.8.0 && \
+https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.9.3.tar.gz && \
+tar xvfz proj-4.9.3.tar.gz && \
+cd proj-4.9.3 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
 make -j && make install
 

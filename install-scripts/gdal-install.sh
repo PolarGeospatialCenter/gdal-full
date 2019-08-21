@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 
+echo
 echo "Please specify a path to install to:"
 read tools
 
@@ -32,11 +32,11 @@ echo -e "Choose GDAL version ($default): \c"
 read gdal_version
 [ -z "$gdal_version" ] && gdal_version=$default
 echo "Using: gdal $gdal_version"
-  
+
 echo "If you need FileGDB write support, download and extract the API from ESRI"
 echo "http://www.esri.com/apps/products/download/#File_Geodatabase_API_1.4"
 echo -e "Path to extracted FileGDB_API (no support): \c"
-read -e filegdb_api_path 
+read -e filegdb_api_path
 if [ -n "$filegdb_api_path" -a -d "$filegdb_api_path" ]; then
     echo "Using:  $filegdb_api_path"
     filegdb_flags="--with-fgdb=$filegdb_api_path"
@@ -55,10 +55,10 @@ export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$t
 
 cd $tools && \
 wget --no-check-certificate \
-http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh && \
-bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
+http://repo.continuum.io/miniconda/Miniconda2-4.7.10-Linux-x86_64.sh && \
+bash Miniconda2-4.7.10-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy jinja2 conda-build dateutil shapely scikit-image pandas lxml 
+echo y | conda install scipy jinja2 conda-build dateutil shapely scikit-image pandas lxml
 echo y | conda install -c conda-forge scandir
 
 # Install configargparse package
@@ -99,7 +99,7 @@ https://github.com/PolarGeospatialCenter/asp/raw/master/originals/geos/geos-3.4.
 tar xvfj geos-3.4.2.tar.bz2 && \
 cd geos-3.4.2 && \
 ./configure --prefix=$tools/geos && \
-make -j && make install 
+make -j && make install
 
 # PROJ
 cd $tools && \

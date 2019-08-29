@@ -58,8 +58,8 @@ wget --no-check-certificate \
 http://repo.continuum.io/miniconda/Miniconda2-4.7.10-Linux-x86_64.sh && \
 bash Miniconda2-4.7.10-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy jinja2 conda-build dateutil shapely scikit-image pandas lxml
-echo y | conda install -c conda-forge scandir
+echo y | conda install scipy jinja2 conda-build shapely scikit-image pandas lxml
+echo y | conda install -c conda-forge -c anaconda scandir dateutil
 
 # Install configargparse package
 cd $tools && \

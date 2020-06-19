@@ -48,7 +48,7 @@ else
 fi
 
 export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH
-export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib
+export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:$tools/anaconda/lib:$tools/pgsql/lib
 
 # Install MiniConda Python distribution
 # This will build the base directory /tools for all following software

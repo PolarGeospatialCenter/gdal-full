@@ -151,7 +151,7 @@ http://download.osgeo.org/gdal/$gdal_version/gdal-$gdal_version.tar.gz && \
 tar xvfz gdal-$gdal_version.tar.gz && \
 cd gdal-$gdal_version && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
---with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no --with-netcdf=$tools/netCDF \
+--with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no --with-netcdf=$tools/netCDF --with-pg=$tools/pgsql/bin/pg_config \
 $filegdb_flags && \
 make && make install && \
 cd swig/python && python setup.py install

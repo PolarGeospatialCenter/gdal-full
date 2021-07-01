@@ -48,7 +48,7 @@ else
 fi
 
 export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH
-export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib
+export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:$tools/anaconda/lib:$tools/pgsql/lib
 
 # Install MiniConda Python distribution
 # This will build the base directory /tools for all following software
@@ -58,8 +58,8 @@ wget --no-check-certificate \
 http://repo.continuum.io/miniconda/Miniconda2-4.7.10-Linux-x86_64.sh && \
 bash Miniconda2-4.7.10-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy jinja2 conda-build shapely scikit-image pandas lxml
-echo y | conda install -c conda-forge -c anaconda scandir dateutil
+echo y | conda install scipy jinja2 conda-build shapely scikit-image pandas lxml openssl zlib readline
+echo y | conda install -c conda-forge -c anaconda scandir python-dateutil
 
 # Install configargparse package
 cd $tools && \
@@ -72,15 +72,18 @@ python setup.py install && \
 cd .. && \
 rm -f master.zip
 
-# Install conda postgresql client package
-vers=0.1
+# Install postgresql client
 cd $tools && \
-wget --no-check-certificate \
-https://github.com/minadyn/conda-postgresql-client/archive/$vers.zip && \
-unzip $vers && \
-conda build conda-postgresql-client-$vers && \
-conda install --yes $(conda build conda-postgresql-client-$vers --output) && \
-rm -f conda-postgresql-client-$vers
+wget --no-check-certificate https://ftp.postgresql.org/pub/source/v9.5.22/postgresql-9.5.22.tar.gz && \
+tar xvzf postgresql-9.5.22.tar.gz && \
+cd postgresql-9.5.22 && \
+./configure --prefix=$tools/pgsql --with-openssl --with-libraries=$tools/anaconda/lib --with-includes=$tools/anaconda/include && \
+make && \
+make -C src/bin install && \
+make -C src/include install && \
+make -C src/interfaces install && \
+make -C doc install && \
+rm -f postgresql-9.5.22.tar.gz
 
 # Install CFITSIO
 cd $tools && \
@@ -148,16 +151,16 @@ http://download.osgeo.org/gdal/$gdal_version/gdal-$gdal_version.tar.gz && \
 tar xvfz gdal-$gdal_version.tar.gz && \
 cd gdal-$gdal_version && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
---with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no --with-netcdf=$tools/netCDF \
+--with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no --with-netcdf=$tools/netCDF --with-pg=$tools/pgsql/bin/pg_config \
 $filegdb_flags && \
 make && make install && \
 cd swig/python && python setup.py install
 
 export	GDAL_DATA=$tools/gdal/share/gdal
 
-echo "export	PATH=$tools/anaconda/bin:$tools/gdal/bin:\$PATH" >> $tools/init-gdal.sh
+echo "export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$tools/pgsql/bin:\$PATH" >> $tools/init-gdal.sh
 echo "export	GDAL_DATA=$tools/gdal/share/gdal" >> $tools/init-gdal.sh
-echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:$filegdb_ldpath:$tools/netCDF/lib\$LD_LIBRARY_PATH" >> $tools/init-gdal.sh
+echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:$filegdb_ldpath:$tools/netCDF/lib:$tools/pgsql/lib:$tools/anaconda/lib:\$LD_LIBRARY_PATH" >> $tools/init-gdal.sh
 echo
 echo	"The tools were installed in $tools."
 echo	"There is an init script that sets the environment and is installed at $tools/init-gdal.sh. You can source this file to run."
